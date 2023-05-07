@@ -3,6 +3,7 @@
 body{
 	overflow:hidden;
 	background-color:#fcfcfc;
+	background-image: url('/assets/wood.jpg');
 	margin:0;
 	padding:0;
 }
