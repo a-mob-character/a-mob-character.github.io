@@ -1,5 +1,7 @@
 var $ = document.getElementById.bind(document);
 document.addEventListener("DOMContentLoaded", function () {
+  const urlParams = new URLSearchParams(window.location.search);
+  const sourceType = urlParams.get("s");
   let albumTitle = $("title"),
     albumIdText = $("id"),
     albumLoc = $("loc-type"),
@@ -14,9 +16,14 @@ document.addEventListener("DOMContentLoaded", function () {
     albumId = "",
     location = "",
     permalink = "",
-    date = "2023-05-10 18:16:35 +0530",
-    categories = "gallery album";
-  (albumDate = $("date")), (albumTime = $("time")), (submit = $("submit"));
+    date = "2023-05-10 18:16:35 +0530";
+
+    if(sourceType == "1"){
+      albumLoc.selectedIndex = 1;
+      urlDiv.style.display = "block";
+        thumbUrl.required = true;
+        origninalUrl.required = true;
+    }
   if (albumTitle) {
     albumTitle.addEventListener("input", function (e) {
       let id = e.target.value.replaceAll(" ", "-").toLowerCase();

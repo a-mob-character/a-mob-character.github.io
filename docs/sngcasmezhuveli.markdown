@@ -9,4 +9,7 @@ type: hidden
 - <a href="/previews/brochures/sngcasmezhuveli/ml/" target="_blank">Malayalam</a>
 
 #### View website nightly builds:
-- <a href="https://sngcasmezhuveli.github.io" target="_blank">Website</a>
+- <a href="https://bharatsp007.github.io" target="_blank">Website</a>
+
+#### Tools:
+- <a href="./tools/gallery/wizard/" target="_blank">Gallery</a>
