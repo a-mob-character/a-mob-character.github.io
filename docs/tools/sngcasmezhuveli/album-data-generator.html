@@ -14,10 +14,12 @@ permalink: /sngcasmezhuveli/tools/album-data-generator
         <option>Internal</option>
         <option>External</option>
     </select>
-
-    <label for="url" id="url-label" style="display: none;">Album URL</label>
-    <input type="url" id="url" style="display: none;">
-
+    <div id="external-urls" style="display: none;">
+        <label for="url" >Thumbnail Urls</label>
+        <textarea id="thumb-url" ></textarea>
+        <label for="url" >Orignial Urls</label>
+        <textarea id="original-url"></textarea>
+    </div>
     <label for="date" >Event Date</label>
     <input type="date" id="date" required>
 

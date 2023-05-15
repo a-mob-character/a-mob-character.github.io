@@ -3,8 +3,9 @@ document.addEventListener("DOMContentLoaded", function () {
   let albumTitle = $("title"),
     albumIdText = $("id"),
     albumLoc = $("loc-type"),
-    albumUrl = $("url"),
-    albumUrlLabel = $("url-label"),
+    urlDiv = $("external-urls"),
+    thumbUrl = $("thumb-url"),
+    origninalUrl = $("original-url"),
     albumDate = $("date"),
     albumTime = $("time"),
     albumForm = $("album-form"),
@@ -26,32 +27,32 @@ document.addEventListener("DOMContentLoaded", function () {
       type = e.target.selectedIndex;
       console.log("I'm a changed man!" + type);
       if (type == 1) {
-        albumUrlLabel.style.display = "block";
-        albumUrl.style.display = "block";
-        albumUrl.required = true;
+        urlDiv.style.display = "block";
+        thumbUrl.required = true;
+        origninalUrl.required = true;
       } else {
-        albumUrlLabel.style.display = "none";
-        albumUrl.style.display = "none";
-        albumUrl.required = false;
+        urlDiv.style.display = "none";
+        thumbUrl.required = false;
+        origninalUrl.required = false;
       }
     });
+
     albumForm.addEventListener("submit", function (e) {
       e.preventDefault();
       title = albumTitle.value;
       albumId = albumIdText.value;
 
       if (type == 0) {
-        location = `/assets/gallery/uploads/${albumId}/full-size/`;
-      } else{
-        location = albumUrl.value;
+        location = `internal`;
+      } else {
+        location = "external";
       }
       permalink = `/gallery/albums/${albumId}`;
 
       let fileDate = albumDate.value,
-      time = albumTime.value;
-      date= `${fileDate} ${time}:00 +0530`
-      let content = 
-`---
+        time = albumTime.value;
+      date = `${fileDate} ${time}:00 +0530`;
+      let content = `---
 layout: album
 title: ${title}
 album_id: ${albumId}
@@ -62,8 +63,19 @@ date: ${date}
 categories: gallery album
 ---
 `,
-      filename = `${fileDate}-${albumId}.markdown`;
+        filename = `${fileDate}-${albumId}.markdown`;
       createFile(content, filename);
+
+      let externalContent = `- images:`;
+      let thumbUrlList = thumbUrl.value.split("\n");
+      let originalUrlList = origninalUrl.value.split("\n");
+      for (i = 0; i < thumbUrlList.length; i++) {
+        externalContent += `
+  - thumb: "${thumbUrlList[i]}"
+    full: "${originalUrlList[i]}"`;
+      }
+
+      createFile(externalContent, `${albumId}.yml`);
     });
   }
 });
