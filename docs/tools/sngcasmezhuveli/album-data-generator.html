@@ -1,0 +1,39 @@
+---
+layout: default
+permalink: /sngcasmezhuveli/tools/album-data-generator
+---
+<form id="album-form">
+    <label for="title" class="">Album Title</label>
+    <input type="text" id="title" required>
+
+    <label for="id" class="">Album ID</label>
+    <input type="text" id="id" required>
+
+    <label for="loc-type">Album Location Type</label>
+    <select id="loc-type" required>
+        <option>Internal</option>
+        <option>External</option>
+    </select>
+
+    <label for="url" id="url-label" style="display: none;">Album URL</label>
+    <input type="url" id="url" style="display: none;">
+
+    <label for="date" >Event Date</label>
+    <input type="date" id="date" required>
+
+    <label for="time" >Event Time</label>
+    <input type="time" id="time" required>
+    <button type="submit" id="submit">Create Album Data</button>
+</form>
+<!--
+    layout: album
+title:  "Event Title"
+background: album
+event_id: event-title
+location: "/assets/gallery/uploads/event-title/full-size/"
+permalink: "/gallery/albums/event-title"
+image: "/assets/college.jpg"
+type: album
+date: 2023-05-10 18:16:35 +0530
+categories: gallery album
+-->
