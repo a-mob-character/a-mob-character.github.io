@@ -8,9 +8,11 @@ document.addEventListener("DOMContentLoaded", function () {
     urlDiv = $("external-urls"),
     thumbUrl = $("thumb-url"),
     origninalUrl = $("original-url"),
+    altText = $("alt-text"),
     albumDate = $("date"),
     albumTime = $("time"),
     albumForm = $("album-form"),
+    charCount = $("char-count"),
     type = 0,
     title = "",
     albumId = "",
@@ -18,12 +20,23 @@ document.addEventListener("DOMContentLoaded", function () {
     permalink = "",
     date = "2023-05-10 18:16:35 +0530";
 
-    if(sourceType == "1"){
-      albumLoc.selectedIndex = 1;
-      urlDiv.style.display = "block";
-        thumbUrl.required = true;
-        origninalUrl.required = true;
-    }
+    altText.addEventListener("input", function (e) {
+   
+      let value = e.target.value;
+      let alts = value.split("\n");
+      let counts = alts[0].length
+      for(i=1; i<alts.length; i++){
+        counts += ` ,${alts[i].length}`;
+      }
+      charCount.textContent  = counts;
+    })
+  if (sourceType == "1") {
+    albumLoc.selectedIndex = 1;
+    urlDiv.style.display = "block";
+    thumbUrl.required = true;
+    origninalUrl.required = true;
+    altText.required = true
+  }
   if (albumTitle) {
     albumTitle.addEventListener("input", function (e) {
       let id = e.target.value.replaceAll(" ", "-").toLowerCase();
@@ -37,10 +50,12 @@ document.addEventListener("DOMContentLoaded", function () {
         urlDiv.style.display = "block";
         thumbUrl.required = true;
         origninalUrl.required = true;
+        altText.required = true;
       } else {
         urlDiv.style.display = "none";
         thumbUrl.required = false;
         origninalUrl.required = false;
+        altText.required = false;
       }
     });
 
@@ -72,17 +87,21 @@ categories: gallery album
 `,
         filename = `${fileDate}-${albumId}.markdown`;
       createFile(content, filename);
-
-      let externalContent = `- images:`;
-      let thumbUrlList = thumbUrl.value.split("\n");
-      let originalUrlList = origninalUrl.value.split("\n");
-      for (i = 0; i < thumbUrlList.length; i++) {
-        externalContent += `
+      if (location == 1) {
+        let externalContent = `- images:`;
+        let thumbUrlList = thumbUrl.value.split("\n");
+        let originalUrlList = origninalUrl.value.split("\n");
+        let altTextList = altText.value.split("\n");
+        for (i = 0; i < thumbUrlList.length; i++) {
+          externalContent += `
   - thumb: "${thumbUrlList[i]}"
-    full: "${originalUrlList[i]}"`;
-      }
+    full: "${originalUrlList[i]}"
+    alt: "${altTextList[i]}"`
+    
+        }
 
-      createFile(externalContent, `${albumId}.yml`);
+        createFile(externalContent, `${albumId}.yml`);
+      }
     });
   }
 });

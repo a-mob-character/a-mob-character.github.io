@@ -11,11 +11,14 @@ textarea {
   width: 100%;
   display: block;
   padding: 8px;
-  margin: 0 0 $spacing-unit 0;
+ 
   box-sizing: border-box;
   resize: vertical;
   font-size: $base-font-size;
  
+}
+label{
+  margin:  $spacing-unit 0 0 0;
 }
 button{
     padding: 8px calc(#{$spacing-unit} /2 ) 8px calc(#{$spacing-unit} /2 );
